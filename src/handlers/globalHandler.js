@@ -134,6 +134,9 @@ class globalHandler {
                 res.status(200).send({status:false,msg:"invalid request"});
             }else{
                 let supid = parseInt(req.body.supid);
+                req.body.qty = parseInt(req.body.qty);
+                const product = await get(req.app.get('models')['products'],{pname:req.body.pname});
+                const resp = await update(req.app.get('models')['products'],product.id,{qty: req.body.qty+product.qty});
                 const res1 = await update(req.app.get('models')['supplier_requests'],supid,{req_status:'accepted',sp_comments:req.body.commets})
                 res.status(200).send({status:true,msg:'done'});
             }
