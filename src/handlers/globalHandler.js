@@ -102,7 +102,7 @@ class globalHandler {
                 req.body.req_status = 'in progress';
                 req.body.qty_req = parseInt(req.body.qty_req);
                 const response = await insert(req.app.get('models')['supplier_requests'],req.body);
-                res.status(200).send({status:false,msg:"request initiated"});
+                res.status(200).send({status:true,msg:"request initiated"});
             }
         } catch (error) {
             console.log(error);
