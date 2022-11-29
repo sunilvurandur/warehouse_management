@@ -1,9 +1,4 @@
-/*
-    This module is for user management  
-    Project : CIE ONEUI CLIENT SERVER
-    Team    : CIE
-    Date    : 20-09-2021
-*/
+
 
 'use-strict';
 const routes = require('express').Router();
