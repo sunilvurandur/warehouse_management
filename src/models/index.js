@@ -14,14 +14,12 @@ const basename = path.basename(__filename);
  */
 
 const models = {};
-// const dbName = process.env.DATABASE;
+
 const dialect = 'mssql';
-// const host = process.env.HOST;
-// const userName= process.env.USER;
-// const password = process.env.PASSWORD;
+
 
 const dbName = "dbo";
-// const dialect = 'mssql';
+
 const host = "localhost";
 const userName= "root";
 const password = "admin";
