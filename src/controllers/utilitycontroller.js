@@ -1,9 +1,3 @@
-/*
-    This module is for user management controller 
-    Project : CIE ONEUI CLIENT SERVER
-    Team    : CIE
-    Date    : 20-09-2021
-*/
 'use-strict';
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
