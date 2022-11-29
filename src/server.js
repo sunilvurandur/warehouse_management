@@ -26,7 +26,7 @@ const {models} = require('./models')
 app.use(bodyParser.json());
 
 app.get('', (req, res) => {
-    res.send("CIE ONE-UI BACKEND (MSI) up and running")
+    res.send("Application is up and running")
 })
 const routes = require('./routes/routes');
 
@@ -49,5 +49,5 @@ models.sequelize.sync({force: eraseDatabaseOnSync}).then(() => {
 });
 
 http.listen(process.env.APPLICATION_PORT || 8080, () => {
-    console.log(`IDAP App server listening on port : 8080`);
+    console.log(` App server listening on port : 8080`);
 })
