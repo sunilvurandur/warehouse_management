@@ -19,6 +19,10 @@ class globalHandler {
 
 
     //products 
+    /*
+        View Products - This method is responsible to fetch all the products from Database and send it to UI
+        This method is primary endpoint for UI to communicate and from here Node will communicate with MYSQL DB using sequelize package
+    */
     async viewProducts(req, res){
         try {
             const response = await list(req.app.get('models')['products'],"pname");
@@ -30,7 +34,12 @@ class globalHandler {
 
 
     //supplies
-
+    /*
+        addStoreRequest - this method helps Store managet to crete a new request . if store manager want to trade an item from warehouse this endpoint
+        responsible to initiate the request in DB
+        
+        this method accepts storeName , ProductName , Quantity Requested , Description , Status as primary parameters to create a new request
+    */
     async addStoreRequest(req,res){
         try {
             if(!req.body){
@@ -44,6 +53,10 @@ class globalHandler {
         }
     }
 
+    /*
+        fetchStoreRequests - inorder to view all the requests created by store manager , this endpoint will fetch records from DB (store requests table) and send those
+        requests to UI so that store manager can easily track their requests and also warehouse manager can update requests easily
+    */
     async fetchStoreRequests(req, res){
         try {
             if(req.query.wname){
@@ -62,6 +75,13 @@ class globalHandler {
         }
     }
 
+    /*
+        Accept Store Request- After reviewing request raised by store manager , warehouse manager should eiter accept or decline the request . here- this endpoint 
+        is responsible to accept a store request
+        
+        If request is accepted then it will update the quantity of the product in product table based on trade quantity.
+        If requested quantity is greater than avaliable quantity then it will stop processing request and displays an error to user in UI
+    */
     async acceptStoreRequest(req, res){
         try {
             if(!req.body){
@@ -78,6 +98,11 @@ class globalHandler {
             console.log(error);
         }
     }
+    
+    /*
+        rejectStoreRequest -- This endpoint is responsible to decline/reject a request raised by store manager. If rejected then it will just update the request status
+        in DB and no other data modifications will take place. User can also provide comments while rejecting a request
+    */
     async rejectStoreRequest(req, res){
         try {
             if(!req.body){
@@ -94,6 +119,10 @@ class globalHandler {
     }
 
 
+    /*
+        addsuppliesRequest -- this endpoint will be used by warehouse manager to raise a request to supplier to trade products. Warehouse manager should provide
+        product name , required quantity , warehouse name and supplier name he wants to trade
+    */
     async addSuppliesRequest(req, res){
         try {
             if(!req.body){
@@ -110,6 +139,10 @@ class globalHandler {
     }
 
 
+    /*
+        fetchSuppliersRequest - this api is responsible to fetch all the requests raised by warehouse manager. so based on the data in table , both warehouse manager
+        and supplier can easily track and manage the requsts
+    */
     async fetchSuppliesRequests(req, res){
         try {
             if(req.query.wname){
@@ -128,6 +161,12 @@ class globalHandler {
         }
     }
 
+     /*
+        Accept Warehouse Request- After reviewing request raised by Warehouse manager , Supplier should eiter accept or decline the request . here- this endpoint 
+        is responsible to accept a Warehouse request
+        
+        If request is accepted then it will update the quantity of the product in product table based on trade quantity.
+    */
     async acceptSuppliesRequest(req, res){
         try {
             if(!req.body){
@@ -144,6 +183,11 @@ class globalHandler {
             console.log(error);
         }
     }
+    
+     /*
+        rejectStoreRequest -- This endpoint is responsible to decline/reject a request raised by warehouse manager. If rejected then it will just update the request status
+        in DB and no other data modifications will take place. User can also provide comments while rejecting a request
+    */
     async rejectSuppliesRequest(req, res){
         try {
             if(!req.body){
@@ -159,6 +203,9 @@ class globalHandler {
         }
     }
 
+    /*
+        This endpoint is used to create new warehouse manager . so that store manager can trade products with multiple warehouses
+    */
     async addWarehouses(req,res){
         try {
             const response = await insert(req.app.get('models')['warehouses'], req.body);
